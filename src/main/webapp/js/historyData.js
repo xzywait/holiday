@@ -17,10 +17,10 @@ $(function () {
         pagination: true,
         pageSize: 5,
         pageList: [5, 8, 10, 20, 30, 40],
-        fit: true,
-        fitColumns: false,
-        width: 1060,
-        height: 400,
+        fit: false,
+        fitColumns: true,
+        // width: 1060,
+
         columns: [[
             {field: 'date', title: '日期', rowspan: 2, width: 100, align: 'center'},
             {title: '温度', halign: 'center', colspan: 4, width: 480},
