@@ -68,7 +68,7 @@ public class GetHistoryDataAction {
         return "success";
     }
 
-    public String getHistoryDataByDay(){
+   /* public String getHistoryDataByDay(){
         System.out.println("=============================获取当天数据============================");
         System.out.print("开始时间："+startTime+",结束时间:"+endTime);
 
@@ -181,7 +181,7 @@ public class GetHistoryDataAction {
         }
 
         return "todayData";
-    }
+    }*/
 
     //计算时间
     public void countDataTime() {
