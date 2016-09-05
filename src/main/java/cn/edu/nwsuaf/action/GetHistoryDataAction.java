@@ -194,7 +194,7 @@ public class GetHistoryDataAction {
         if ((searchStartTime == null || searchStartTime.equals("")) && (searchEndTime == null || searchEndTime.equals(""))) {
             System.out.println("====================默认获取第一个地块当前月的历史数据====================");
             Date now = new Date();
-            searchEndTime = format.format(now);
+            searchEndTime   = format.format(now);
 
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
