@@ -68,120 +68,120 @@ public class GetHistoryDataAction {
         return "success";
     }
 
-//    public String getHistoryDataByDay(){
-//        System.out.println("=============================获取当天数据============================");
-//        System.out.print("开始时间："+startTime+",结束时间:"+endTime);
-//
-//        List<Device_info> deviceList = new ArrayList<>();
-//
-//        deviceList = deviceService.getAllDevice();
-//
-//        String[] start = startTime.split(" ");
-//        String[] end = endTime.split(" ");
-//
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
-//
-//        for (Device_info device : deviceList) {
-//            System.out.println(device.toString());
-//            HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-//            CloseableHttpClient httpClient = httpClientBuilder.build();
-//
-//            //传感器网站数据请求
-//            String dataURL = "http://wlw.zjtpyun.com/openapi/v1/device/";
-//            dataURL += device.getDeviceId() + "/data?user_id=361&start_time=" + start[0]+"%20"+start[1] + "&end_time=" + end[0]+"%20"+end[1] + "&num=100";
-//            System.out.println("dataURL:"+dataURL);
-//            //String dataURL = "http://wlw.zjtpyun.com/openapi/v1/device/" + device.getDeviceId() + "/data?user_id=361&start_time=2016-08-10%2007:30:00&end_time=2016-08-10%2008:00:00&num=100";
-//
-//            HttpPost httpPost = new HttpPost(dataURL);
-//
-//            System.out.println(httpPost.getRequestLine());
-//
-//            Integer statusCode = -1;
-//            try {
-//                //站点网站数据请求与数据获取
-//                httpPost.setHeader("accept", "application/json");
-//                httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
-//
-//                HttpResponse response = httpClient.execute(httpPost);
-//
-//                statusCode = response.getStatusLine().getStatusCode();
-//
-//                if (statusCode != HttpStatus.SC_OK) {
-//                    System.out.println("Http Status is error.");
-//                }
-//
-//                HttpEntity entity = response.getEntity();
-//                StringBuffer result = new StringBuffer();
-//                BufferedReader rd = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
-//                String tempLine = rd.readLine();
-//                while (tempLine != null) {
-//                    result.append(tempLine);
-//                    tempLine = rd.readLine();
-//                }
-//                System.out.println("===========================result==============================");
-//                System.out.println("result:" + result.toString());
-//
-//                // 将json格式字符串转换成json对象
-//                JSONObject json = JSONObject.fromObject(result.toString());
-//                System.out.println("=============================解析json数据========================");
-//
-//                if (json.containsKey("result")) {
-//                    JSONArray jsonArray = JSONArray.fromObject(json.get("result"));
-//                    for (int i = 0; i < jsonArray.size(); i++) {
-//
-//                        JSONObject data = (JSONObject) jsonArray.get(i);
-//                        String sensor_id = (String) data.get("sensor_id");
-//                        String data_id = (String) data.get("data_id");
-//                        String data_value = (String) data.get("data_value");
-//                        String sensor_type_id = (String) data.get("sensor_type_id");
-//                        String collect_time = (String) data.get("collect_time");
-//                        String unit = data.get("unit").toString();
-//
-//                        Data dataObject = new Data();
-//                        dataObject.setDataId(Integer.valueOf(data_id));
-//                        dataObject.setDeviceId(device.getDeviceId());
-//                        dataObject.setSenserId(Integer.valueOf(sensor_id));
-//                        dataObject.setDataValue(Double.valueOf(data_value));
-//                        dataObject.setSensorTypeId(Integer.valueOf(sensor_type_id));
-//                        try {
-//                            dataObject.setCollectTime(format.parse(collect_time));
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-//                        dataObject.setUnit(unit);
-//                        System.out.println(dataObject.toString());
-//                        System.out.println("-----deviceAction save device_info----------------");
-//
-//                        //查询数据库是否有这条记录
-//                        Data returnData = dataService.getDevice_info(dataObject);
-//                        if(returnData==null){
-//                            try {
-//                                dataService.saveData(dataObject,true);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }else{
-//                            try {
-//                                dataService.saveData(dataObject,false);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                        System.out.println("------save successfully----------------");
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            try {
-//                httpClient.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return "todayData";
-//    }
+    public String getHistoryDataByDay(){
+        System.out.println("=============================获取当天数据============================");
+        System.out.print("开始时间："+startTime+",结束时间:"+endTime);
+
+        List<Device_info> deviceList = new ArrayList<>();
+
+        deviceList = deviceService.getAllDevice();
+
+        String[] start = startTime.split(" ");
+        String[] end = endTime.split(" ");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+
+        for (Device_info device : deviceList) {
+            System.out.println(device.toString());
+            HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+            CloseableHttpClient httpClient = httpClientBuilder.build();
+
+            //传感器网站数据请求
+            String dataURL = "http://wlw.zjtpyun.com/openapi/v1/device/";
+            dataURL += device.getDeviceId() + "/data?user_id=361&start_time=" + start[0]+"%20"+start[1] + "&end_time=" + end[0]+"%20"+end[1] + "&num=100";
+            System.out.println("dataURL:"+dataURL);
+            //String dataURL = "http://wlw.zjtpyun.com/openapi/v1/device/" + device.getDeviceId() + "/data?user_id=361&start_time=2016-08-10%2007:30:00&end_time=2016-08-10%2008:00:00&num=100";
+
+            HttpPost httpPost = new HttpPost(dataURL);
+
+            System.out.println(httpPost.getRequestLine());
+
+            Integer statusCode = -1;
+            try {
+                //站点网站数据请求与数据获取
+                httpPost.setHeader("accept", "application/json");
+                httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
+
+                HttpResponse response = httpClient.execute(httpPost);
+
+                statusCode = response.getStatusLine().getStatusCode();
+
+                if (statusCode != HttpStatus.SC_OK) {
+                    System.out.println("Http Status is error.");
+                }
+
+                HttpEntity entity = response.getEntity();
+                StringBuffer result = new StringBuffer();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
+                String tempLine = rd.readLine();
+                while (tempLine != null) {
+                    result.append(tempLine);
+                    tempLine = rd.readLine();
+                }
+                System.out.println("===========================result==============================");
+                System.out.println("result:" + result.toString());
+
+                // 将json格式字符串转换成json对象
+                JSONObject json = JSONObject.fromObject(result.toString());
+                System.out.println("=============================解析json数据========================");
+
+                if (json.containsKey("result")) {
+                    JSONArray jsonArray = JSONArray.fromObject(json.get("result"));
+                    for (int i = 0; i < jsonArray.size(); i++) {
+
+                        JSONObject data = (JSONObject) jsonArray.get(i);
+                        String sensor_id = (String) data.get("sensor_id");
+                        String data_id = (String) data.get("data_id");
+                        String data_value = (String) data.get("data_value");
+                        String sensor_type_id = (String) data.get("sensor_type_id");
+                        String collect_time = (String) data.get("collect_time");
+                        String unit = data.get("unit").toString();
+
+                        Data dataObject = new Data();
+                        dataObject.setDataId(Integer.valueOf(data_id));
+                        dataObject.setDeviceId(device.getDeviceId());
+                        dataObject.setSenserId(Integer.valueOf(sensor_id));
+                        dataObject.setDataValue(Double.valueOf(data_value));
+                        dataObject.setSensorTypeId(Integer.valueOf(sensor_type_id));
+                        try {
+                            dataObject.setCollectTime(format.parse(collect_time));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        dataObject.setUnit(unit);
+                        System.out.println(dataObject.toString());
+                        System.out.println("-----deviceAction save device_info----------------");
+
+                        //查询数据库是否有这条记录
+                        Data returnData = dataService.getDevice_info(dataObject);
+                        if(returnData==null){
+                            try {
+                                dataService.saveData(dataObject,true);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            try {
+                                dataService.saveData(dataObject,false);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        System.out.println("------save successfully----------------");
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "todayData";
+    }
 
     //计算时间
     public void countDataTime() {
