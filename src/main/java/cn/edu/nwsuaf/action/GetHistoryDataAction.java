@@ -1,4 +1,4 @@
-package cn.edu.nwsuaf.action;
+﻿package cn.edu.nwsuaf.action;
 
 import cn.edu.nwsuaf.model.entity.Data;
 import cn.edu.nwsuaf.model.entity.Device_info;
@@ -60,7 +60,7 @@ public class GetHistoryDataAction {
     Station_info returnStation = null;
 
     public String execute() {
-        stationName = stationService.getStationName();
+        stationName =     stationService.getStationName();
 
         for (String s : stationName) {
             System.out.println(s);
