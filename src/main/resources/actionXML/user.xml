@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="userManager" namespace="/user" extends="json-default">
+        <!--<action name="user_*" class="cn.edu.nwsuaf.action.UserAction" method="{1}">
+                <result name="list">/WEB-INF/views/user.jsp</result>
+                <result name="edit">/WEB-INF/views/user/edit.jsp</result>
+                <result name="save" type="redirectAction">user_list</result>
+        </action>
+        -->
+        <!--页面跳转-->
+        <action name="toListJsp" class="cn.edu.nwsuaf.action.UserAction">
+            <result name="success">/WEB-INF/views/backstage/user.jsp</result>
+        </action>
+        <!--分页查询所有记录-->
+        <action name="getUsers" class="cn.edu.nwsuaf.action.UserAction" method="list">
+            <result name="success" type="json">
+                <param name="total">total</param>
+                <param name="rows">rows</param>
+            </result>
+        </action>
+        <!--多条件分页查询-->
+        <action name="searchUser" class="cn.edu.nwsuaf.action.UserAction" method="searchUser">
+            <result name="success" type="json">
+                <param name="total">total</param>
+                <param name="rows">rows</param>
+            </result>
+        </action>
+        <!--添加一条记录-->
+        <action name="addUser" class="cn.edu.nwsuaf.action.UserAction" method="addUser">
+            <result name="success" type="json">
+                <param name="result">result</param>
+        </result>
+        </action>
+        <!--修改一条记录-->
+        <action name="editUser" class="cn.edu.nwsuaf.action.UserAction" method="editUser">
+            <result name="success" type="json">
+                <param name="result">result</param>
+            </result>
+        </action>
+        <!--删除多条记录-->
+        <action name="deleteUsers" class="cn.edu.nwsuaf.action.UserAction" method="deleteUsers">
+            <result name="success" type="json">
+                <param name="result">result</param>
+            </result>
+        </action>
+    </package>
+</struts>

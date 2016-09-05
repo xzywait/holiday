@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwsuaf.model.dao.DeviceDao">
+    <select id="get" resultType="Device_info">
+        select * FROM device_info
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="landId != null">
+                land_id = #{landId}
+            </if>
+            <if test="deviceId != null">
+                and device_id = #{deviceId}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectDevice" parameterType="Map" resultType="Device_info">
+        SELECT* FROM device_info
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="landId != null">
+                land_id = #{landId} AND
+            </if>
+        </trim>
+        (device_name like "%" '土壤温度' OR device_name like "%" '土壤水分')
+    </select>
+
+    <select id="find" resultType="Device_info">
+       SELECT  * from device_info
+    </select>
+
+    <insert id="insert">
+        insert into device_info
+        (
+           land_id,
+           device_id,
+           device_name,
+           device_type_id,
+           sensor_type_id,
+           sensor_tag
+        )
+        VALUES
+        (
+           #{landId},
+           #{deviceId},
+           #{deviceName},
+           #{deviceTypeId},
+           #{sensorTypeId},
+           #{sensorTag}
+        )
+    </insert>
+    <update id="update">
+        UPDATE device_info
+        SET
+        device_name = #{deviceName},
+        device_type_id = #{deviceTypeId},
+        sensor_type_id = #{sensorTypeId},
+        sensor_tag = #{sensorTag}
+        where
+        land_id = #{landId} AND device_id = #{deviceId}
+    </update>
+    <delete id="delete">
+        delete from user where  land_id = #{landId} AND device_id = #{deviceId}
+    </delete>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="dataManager" namespace="/data" extends="base">
+        <action name="getStationData" class="cn.edu.nwsuaf.action.GetDataAction" method="getLandData">
+            <result name="success">/WEB-INF/views/data/success.jsp</result>
+            <result name="fail">/WEB-INF/views/data/fail.jsp</result>
+        </action>
+
+        <action name="getDevice" class="cn.edu.nwsuaf.action.GetDataAction" method="getDevice">
+            <result name="success">/WEB-INF/views/data/success.jsp</result>
+            <result name="fail">/WEB-INF/views/data/fail.jsp</result>
+        </action>
+
+        <!--从后台获取station名称传到前台-->
+        <action name="getStationNames" class="cn.edu.nwsuaf.action.InitFrontAjaxAction" method="getStationNamesAjaxAction"></action>
+    </package>
+</struts>

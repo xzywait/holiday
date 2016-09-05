@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="monitoringManager" namespace="/monitoring" extends="json-default">
+        <!--页面跳转-->
+        <action name="toListJsp" class="cn.edu.nwsuaf.action.MonitoringAction">
+            <result name="success">/WEB-INF/views/frontEnd/monitoring.jsp</result>
+        </action>
+
+        <!--页面跳转-->
+        <action name="getMonitorData" class="cn.edu.nwsuaf.action.MonitoringAction" method="getMonitorData">
+            <result name="listByPage" type="json">
+                <param name="total">total</param>
+                <param name="rows">rows</param>
+            </result>
+        </action>
+
+    </package>
+</struts>

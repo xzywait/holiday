@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="historyDataManager" namespace="/historyData" extends="json-default">
+        <!--页面跳转-->
+        <action name="toListJsp" class="cn.edu.nwsuaf.action.GetHistoryDataAction">
+            <result name="success">/WEB-INF/views/frontEnd/getHistoryData.jsp</result>
+        </action>
+
+        <action name="getHistoryData" class="cn.edu.nwsuaf.action.GetHistoryDataAction" method="getHistoryDataByDay">
+            <result name="todayData">/WEB-INF/views/frontEnd/getHistoryData.jsp</result>
+        </action>
+        <!--生成图表数据-->
+        <action name="getCharsDatas" class="cn.edu.nwsuaf.action.GetHistoryDataAction" method="getCharsDatas">
+            <result name="charDatas" type="json">
+                <param name="result">result</param>
+                <param name="tableTitle">tableTitle</param>
+            </result>
+        </action>
+        <!--生成历史查询数据-->
+        <action name="getHistoryDataBySearch" class="cn.edu.nwsuaf.action.GetHistoryDataAction" method="getHistoryDataBySearch">
+            <result name="historyDatas" type="json">
+                <param name="total">total</param>
+                <param name="rows">rows</param>
+                <param name="tableTitle">tableTitle</param>
+            </result>
+        </action>
+
+    </package>
+</struts>

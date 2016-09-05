@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts</title>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var myChart;
+        $(function () {
+            myChart = echarts.init(document.getElementById('main'));
+//            function randomData() {
+//                now = new Date(+now + oneDay);
+//                value = value + Math.random() * 21 - 10;
+//                return {
+//                    name: now.toString(),
+//                    value: [
+//                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+//                        Math.round(value)
+//                    ]
+//                }
+//            }
+//            function randomData1() {
+//                now1 = new Date(+now1 + oneDay1);
+//                value1 = value1 + Math.random() * 21 - 10;
+//                return {
+//                    name: now1.toString(),
+//                    value: [
+//                        [now1.getFullYear(), now1.getMonth() + 1, now1.getDate()].join('/'),
+//                        Math.round(value1)
+//                    ]
+//                }
+//            }
+//            function randomData2() {
+//                now2 = new Date(+now2 + oneDay2);
+//                value2 = value2 + Math.random() * 21 - 10;
+//                return {
+//                    name: now2.toString(),
+//                    value: [
+//                        [now2.getFullYear(), now2.getMonth() + 1, now2.getDate()].join('/'),
+//                        Math.round(value2)
+//                    ]
+//                }
+//            }
+//            function randomData3() {
+//                now3 = new Date(+now3 + oneDay3);
+//                value3 = value3 + Math.random() * 21 - 10;
+//                return {
+//                    name: now3.toString(),
+//                    value: [
+//                        [now3.getFullYear(), now3.getMonth() + 1, now3.getDate()].join('/'),
+//                        Math.round(value3)
+//                    ]
+//                }
+//            }
+//
+//            var data = [];
+//            var data1 = [];
+//            var now = new Date(1997, 9, 3);
+//            var oneDay = 24 * 3600 * 1000;
+//            var value = Math.random() * 40;
+//            var now1 = new Date(1997, 9, 3);
+//            var oneDay1 = 24 * 3600 * 1000;
+//            var value1 = Math.random() * 40;
+//
+//            for (var i = 0; i < 1000; i++) {
+//                data.push(randomData());
+//            }
+//            for (var i = 0; i < 1000; i++) {
+//                data1.push(randomData1());
+//            }
+//
+//            var data2 = [];
+//            var now2 = new Date(1997, 9, 3);
+//            var oneDay2 = 24 * 3600 * 1000;
+//            var value2 = Math.random() * 40;
+//            var data3 = [];
+//            var now3 = new Date(1997, 9, 3);
+//            var oneDay3 = 24 * 3600 * 1000;
+//            var value3 = Math.random() * 40;
+//            for (var i = 0; i < 1000; i++) {
+//                data2.push(randomData2());
+//            }
+//            for (var i = 0; i < 1000; i++) {
+//                data3.push(randomData3());
+//            }
+
+            var option = {
+                title: {
+                    text: '历史温度'
+                },
+                legend: {
+                    data:['0-20cm','20-40cm','40-60cm','60-80cm']
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'axis'
+//                    formatter: function (params) {
+//                        params = params[0];
+//                        var date = new Date(params.name);
+//                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+//                    },
+//                    axisPointer: {
+//                        animation: false
+//                    }
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    },
+                  //  data:['2016-08-08 08:00','2016-08-20 08:00','2016-08-31 08:00']
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%'],
+                    splitLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name:'0-20cm',
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: []
+                },
+                    {
+                        name:'20-40cm',
+                        type: 'line',
+                        showSymbol: false,
+                        hoverAnimation: false,
+                        data: []
+                    },
+                    {
+                        name:'40-60cm',
+                        type: 'line',
+                        showSymbol: false,
+                        hoverAnimation: false,
+                       data: []
+                    },
+                    {
+                        name:'60-80cm',
+                        type: 'line',
+                        showSymbol: false,
+                        hoverAnimation: false,
+                        data: []
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+          //  myChart.hideLoading();
+            getChartData();//aja后台交互
+        });
+
+        function getChartData() {
+            //获得图表的options对象
+            var options = myChart.getOption();
+            //通过Ajax获取数据
+            $.ajax({
+                type : "post",
+                async : true, //同步执行
+                url : "/historyData/getHistoryDataBySearch",
+                data : {},
+                dataType : "json", //返回数据形式为json
+                success : function(result) {
+//                    var value0 = JSON.stringify(result.result[0]);
+//                    var value1 = JSON.stringify(result.result[1]);
+//                    var value2 = JSON.stringify(result.result[2]);
+//                    var value3 = JSON.stringify(result.result[3]);
+//                    alert("value0:"+value0);
+//                    alert("value1:"+value1);
+//                    alert("value2:"+value2);
+//                    alert("value3:"+value3);
+                    if (result) {
+                        options.series[0].data = result.result[0];
+                        options.series[1].data = result.result[1];
+                        options.series[2].data = result.result[2];
+                        options.series[3].data = result.result[3];
+                      //  myChart.hideLoading();
+                        myChart.setOption(options);
+                    }
+                },
+                error : function(errorMsg) {
+                    alert("不好意思，大爷，图表请求数据失败啦!");
+                    myChart.hideLoading();
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:600px">数据加载中。。。</div>
+
+</body>
+</html>

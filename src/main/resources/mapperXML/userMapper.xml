@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwsuaf.model.dao.UserDao">
+    <select id="get" resultType="User">
+        select * FROM  user
+        WHERE `name` = #{name} AND passwd = #{passwd}
+    </select>
+
+    <select id="getAllUser" resultType="User">
+        select * FROM  user
+    </select>
+
+    <select id="getUserCount" resultType="int">
+        SELECT count(id) from user
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="username!=null and username!=''">
+                `name` like "%" #{username}"%"
+            </if>
+            <if test="realName!=null and realName!=''">
+                and real_name like "%" #{realName}"%"
+            </if>
+            <if test="createTimeStart!=null and createTimeStart!=''">
+                and create_date &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd!=null and createTimeEnd!=''">
+                and  create_date &lt;= #{createTimeEnd}
+            </if>
+        </trim>
+    </select>
+
+    <select id="find" parameterType="Map" resultType="User">
+       SELECT  * from user
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="username!=null and username!=''">
+                `name` like "%" #{username}"%"
+            </if>
+            <if test="realName!=null and realName!=''">
+                and real_name like "%" #{realName}"%"
+            </if>
+            <if test="createTimeStart!=null and createTimeStart!=''">
+                and create_date &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd!=null and createTimeEnd!=''">
+                and  create_date &lt;= #{createTimeEnd}
+            </if>
+        </trim>
+        ORDER BY ${sort} ${order}
+        <if test="pageStart>-1 and rows>-1">
+            limit #{pageStart}, #{rows}
+        </if>
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultType="User">
+        SELECT  * from user WHERE `name` = #{name}
+    </select>
+
+    <insert id="insert">
+        insert into user
+        (
+           `name`,
+           passwd,
+           real_name,
+           create_date
+        )
+        VALUES
+        (
+           #{name},
+           #{passwd},
+           #{realName},
+           now()
+        )
+    </insert>
+    <update id="update">
+        UPDATE user
+        SET
+          `name` = #{name},
+          real_name = #{realName},
+          passwd = #{passwd}
+        where
+           id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
+</mapper>

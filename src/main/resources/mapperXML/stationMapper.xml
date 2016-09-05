@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwsuaf.model.dao.Station_infoDao">
+    <select id="get" resultType="Station_info">
+        select * FROM station_info
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="stationId != null and stationId!=''">
+                station_id = #{stationId}
+            </if>
+            <if test="stationName != null">
+                and station_name = #{stationName}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getStationName" resultType="String">
+        SELECT station_name from station_info;
+    </select>
+
+    <select id="find" resultType="Station_info">
+       SELECT  * from station_info
+    </select>
+
+    <insert id="insert">
+        insert into station_info
+        (
+           station_id,
+           station_name,
+           land_id,
+           land_name,
+           longituade,
+           latitude
+        )
+        VALUES
+        (
+           #{stationId},
+           #{stationName},
+           #{landId},
+           #{landName},
+           #{longituade},
+           #{latitude}
+        )
+    </insert>
+    <update id="update">
+        UPDATE station_info
+        SET
+        station_name = #{stationName}
+        <if test="landId != null and landId != ''">
+            ,land_id = #{landId}
+        </if>
+        <if test="landName != null and landName != ''">
+            ,land_name = #{landName}
+        </if>
+        <if test="longituade != null">
+            ,longituade = #{longituade}
+        </if>
+        <if test="latitude != null">
+            ,latitude = #{latitude}
+        </if>
+
+        where
+        station_name = #{stationName}
+    </update>
+
+    <select id="getStationsCount" resultType="int">
+        SELECT count(station_id) from station_info
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="stationId != null and stationId != ''">
+                station_id = #{stationId}
+            </if>
+            <if test="stationName != null and stationName!=''">
+                and station_name like "%" #{stationName}"%"
+            </if>
+            <if test="longituade != null and longituade != ''">
+                and longituade = #{longituade}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getStations" parameterType="Map" resultType="station_info">
+        SELECT * from station_info
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="stationId != null and stationId != ''">
+                station_id = #{stationId}
+            </if>
+            <if test="stationName != null and stationName!=''">
+                and station_name like "%" #{stationName}"%"
+            </if>
+            <if test="longituade != null and longituade != ''">
+                and longituade = #{longituade}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+        </trim>
+        ORDER BY ${sort} ${order}
+        <if test="pageStart>-1 and rows>-1">
+            limit #{pageStart}, #{rows}
+        </if>
+    </select>
+
+</mapper>

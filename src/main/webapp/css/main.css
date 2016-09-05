@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+*{
+    line-height: 1.5;
+    font-size: 10pt;
+    padding: 0px;
+    text-indent: 0px;
+}
+
+#header{
+    margin-left: 20px;
+    position: relative;
+}
+
+#loginInfo{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+#footer{
+    color:#ccc;
+    text-align: center;
+    line-height: 30px;
+}
+
+.mainTitle{
+    height: 60px;
+    position: relative;
+}
+
+#logout{
+    position: absolute;
+    bottom: 2px;
+    right: 20px;
+}
+
+.mainFooter{
+    height:30px;
+}
+
+.mainLeft{
+    width: 200px;
+    position: relative;
+}
+
+
+a{
+    text-decoration: none;
+    color:blue;
+}

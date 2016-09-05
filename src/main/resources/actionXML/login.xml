@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="loginManager" namespace="/login" extends="struts-default">
+        <action name="loginAction" class="cn.edu.nwsuaf.action.LoginAction" method="login">
+            <result name="success">/WEB-INF/views/backstage/index.jsp</result>
+            <result name="error">/WEB-INF/views/data/fail.jsp</result>
+        </action>
+
+    </package>
+</struts>

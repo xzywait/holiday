@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="stationrManager" namespace="/station" extends="json-default">
+        <!--页面跳转-->
+        <action name="toListJsp" class="cn.edu.nwsuaf.action.StationAction">
+            <result name="success">/WEB-INF/views/backstage/station.jsp</result>
+        </action>
+
+        <!--多条件分页查询-->
+        <action name="searchStations" class="cn.edu.nwsuaf.action.StationAction" method="searchStations">
+            <result name="success" type="json">
+                <param name="total">total</param>
+                <param name="rows">rows</param>
+            </result>
+        </action>
+
+        <action name="reloadStations" class="cn.edu.nwsuaf.action.StationAction" method="reloadStations">
+            <result name="success" type="json">
+                <param name="resultToJSP">resultToJSP</param>
+            </result>
+        </action>
+
+    </package>
+</struts>
