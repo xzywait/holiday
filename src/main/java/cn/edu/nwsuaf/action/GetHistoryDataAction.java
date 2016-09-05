@@ -57,7 +57,7 @@ public class GetHistoryDataAction {
     private StationService stationService;
 
     //公有参数
-    Station_info returnStation = null;
+    Station_info returnStation =   null;
 
     public String execute() {
         stationName =     stationService.getStationName();
