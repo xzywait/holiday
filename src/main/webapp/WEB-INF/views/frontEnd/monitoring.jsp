@@ -27,7 +27,7 @@
                 pagination: true,
                 pageSize: 5,
                 pageList: [5, 8, 10, 20, 30, 40],
-                fit: true,
+                fit: false,
                 fitColumns: false,
                 width: 1060,
 //                frozenColumns: [[
