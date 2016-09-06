@@ -2,10 +2,8 @@ package cn.edu.nwsuaf.listener;
 
 import cn.edu.nwsuaf.model.entity.Data;
 import cn.edu.nwsuaf.model.entity.Device_info;
-import cn.edu.nwsuaf.model.entity.Station_info;
 import cn.edu.nwsuaf.model.service.DataService;
 import cn.edu.nwsuaf.model.service.DeviceService;
-import cn.edu.nwsuaf.model.service.StationService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
